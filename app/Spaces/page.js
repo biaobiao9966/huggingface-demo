@@ -5,13 +5,13 @@ export default function SpacesPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        <div className="flex flex-col items-center mb-8">
-          <h1 class="text-3xl font-bold mb-4">
+        <div className="flex flex-col mb-8">
+          <h1 class="text-3xl font-bold mb-4 left-3">
             Spaces
             <span class="text-gray-400"> .The AI App Directory</span>
           </h1>
 
-          <div className="relative w-full max-w-2xl">
+          <div className="relative w-full max-w-2xl self-center">
             <input
               type="text"
               placeholder="Ask anything you want to do with AI"

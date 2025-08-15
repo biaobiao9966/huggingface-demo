@@ -1,6 +1,25 @@
+"use client";
+import { useState, useRef } from "react";
+import { useEffect } from "react";
 import "../styles/globals.css";
 
 export default function DashboardLayout({ children }) {
+  const [isCommunityOpen, setIsCommunityOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsCommunityOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <html lang="en">
       <body>
@@ -43,12 +62,60 @@ export default function DashboardLayout({ children }) {
               <div className="text-gray-600 hover:text-green-600 hover:font-medium hover:cursor-pointer transition-colors">
                 Datasets
               </div>
-              <div className="text-gray-600 hover:text-purple-600 hover:font-medium hover:cursor-pointer transition-colors">
-                Spaces
+
+              <div className="relative" ref={dropdownRef}>
+                <div
+                  className={`flex items-center text-gray-600 hover:text-pink-600 hover:font-medium hover:cursor-pointer transition-colors ${
+                    isCommunityOpen ? "text-pink-600 font-medium" : ""
+                  }`}
+                  onClick={() => setIsCommunityOpen(!isCommunityOpen)}
+                >
+                  Community
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={`h-4 w-4 ml-1 transition-transform duration-200 ${
+                      isCommunityOpen ? "rotate-180" : ""
+                    }`}
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+
+                {/* 下拉菜单内容 */}
+                {isCommunityOpen && (
+                  <div className="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 border border-gray-200">
+                    <div className="px-4 py-2 text-sm font-medium text-gray-700 border-b border-gray-100">
+                      Community
+                    </div>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-600"
+                    >
+                      Blog Articles
+                    </a>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-600"
+                    >
+                      Social Posts
+                    </a>
+
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-600"
+                    >
+                      Daily Papers
+                    </a>
+                  </div>
+                )}
               </div>
-              <div className="text-gray-600 hover:text-pink-600 hover:font-medium hover:cursor-pointer transition-colors">
-                Community
-              </div>
+
               <div className="text-gray-600 hover:text-yellow-600 hover:font-medium hover:cursor-pointer transition-colors">
                 Docs
               </div>

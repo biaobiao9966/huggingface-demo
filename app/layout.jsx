@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 import { useEffect } from "react";
 import "../styles/globals.css";
+import Link from "next/link";
 
 export default function DashboardLayout({ children }) {
   const [isCommunityOpen, setIsCommunityOpen] = useState(false);
@@ -57,10 +58,10 @@ export default function DashboardLayout({ children }) {
 
             <div className="flex flex-row justify-center items-center gap-8">
               <div className="text-gray-600 hover:text-blue-600 hover:font-medium hover:cursor-pointer transition-colors">
-                Models
+                <Link href="/Model">Models</Link>
               </div>
               <div className="text-gray-600 hover:text-green-600 hover:font-medium hover:cursor-pointer transition-colors">
-                Datasets
+                <Link href="/Datasets">Datasets</Link>
               </div>
 
               <div className="relative" ref={dropdownRef}>
@@ -87,27 +88,26 @@ export default function DashboardLayout({ children }) {
                   </svg>
                 </div>
 
-                {/* 下拉菜单内容 */}
                 {isCommunityOpen && (
                   <div className="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 border border-gray-200">
                     <div className="px-4 py-2 text-sm font-medium text-gray-700 border-b border-gray-100">
                       Community
                     </div>
                     <a
-                      href="#"
+                      href="/Community/Blog_Article"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-600"
                     >
                       Blog Articles
                     </a>
                     <a
-                      href="#"
+                      href="/Community/Social_Posts"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-600"
                     >
                       Social Posts
                     </a>
 
                     <a
-                      href="#"
+                      href="/Community/Daily_Papers"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-600"
                     >
                       Daily Papers
@@ -117,10 +117,10 @@ export default function DashboardLayout({ children }) {
               </div>
 
               <div className="text-gray-600 hover:text-yellow-600 hover:font-medium hover:cursor-pointer transition-colors">
-                Docs
+                <Link href="/Doc">Doc</Link>
               </div>
               <div className="text-gray-600 hover:text-red-600 hover:font-medium hover:cursor-pointer transition-colors">
-                Pricing
+                <Link href="/Pricing">Pricing</Link>
               </div>
             </div>
 

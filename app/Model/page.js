@@ -1,54 +1,61 @@
+"use client";
 import React from "react";
+import { useState } from "react";
 
 export default function ModelPage() {
-  // 模型数据
+  // 使用状态管理当前选中的菜单项
+  const [activeItem, setActiveItem] = useState("Tasks");
+
+  // 分组结构数据
+  const menuGroups = [
+    {
+      title: "WORKSPACE",
+      items: ["Main", "Tasks", "Libraries", "Languages", "Licenses", "Other"],
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="flex flex-col lg:flex-row px-8 py-8 pb-12 max-w-7xl mx-auto">
-        {/* 左侧导航栏 */}
-        <div className="w-full lg:w-64 mb-8 lg:mb-0 lg:mr-8">
+        {/* 左侧导航栏 - 紧凑分组样式 */}
+        <div className="w-full lg:w-56 mb-8 lg:mb-0 lg:mr-8">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-            {/* 导航菜单项 */}
-            <div className="space-y-1 py-3">
-              {[
-                "Main",
-                "Tasks",
-                "Libraries",
-                "Languages",
-                "Licenses",
-                "Other",
-              ].map((item, index) => (
-                <div
-                  key={index}
-                  className={`flex items-center px-4 py-3 cursor-pointer transition-colors ${
-                    index === 1
-                      ? "bg-blue-50 border-l-4 border-blue-500"
-                      : "hover:bg-gray-50"
-                  }`}
-                >
-                  <span
-                    className={`${
-                      index === 1
-                        ? "font-medium text-blue-700"
-                        : "text-gray-600 hover:text-gray-900"
-                    }`}
-                  >
-                    {item}
-                  </span>
+            <div className="py-3 space-y-4">
+              {menuGroups.map((group, groupIndex) => (
+                <div key={groupIndex}>
+                  {/* 分组标题 */}
+                  {group.title && (
+                    <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-2">
+                      {group.title}
+                    </h3>
+                  )}
+
+                  {/* 分组内的菜单项 */}
+                  <div className="space-y-0.5">
+                    {group.items.map((item, itemIndex) => (
+                      <div
+                        key={itemIndex}
+                        className={`flex items-center px-4 py-2.5 cursor-pointer transition-colors text-sm ${
+                          activeItem === item
+                            ? "bg-blue-50 border-l-4 border-blue-500"
+                            : "hover:bg-gray-50"
+                        }`}
+                        onClick={() => setActiveItem(item)}
+                      >
+                        <span
+                          className={`${
+                            activeItem === item
+                              ? "font-medium text-black"
+                              : "text-gray-600 hover:text-gray-900"
+                          }`}
+                        >
+                          {item}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* 工作室卡片 */}
-          <div className="mt-6 bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-            <div className="p-4 border-b border-gray-200"></div>
-            <div className="p-4">
-              <div className="flex items-center">
-                <div className="bg-gray-200 border-2 border-dashed rounded-xl w-10 h-10 mr-3" />
-                <div></div>
-              </div>
             </div>
           </div>
         </div>

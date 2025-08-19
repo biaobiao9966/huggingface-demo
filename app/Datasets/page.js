@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function ModelPage() {
-  // 模型数据
   const models = [
     {
       id: 1,
